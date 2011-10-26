@@ -1,0 +1,97 @@
+= MiniTest::Spec Magic
+
+Adds shoulda-like goodies to Minitest::Spec. Makes testing more elegant and
+comfortable. Originally built for Rails, but can probably be used elsewhere.
+
+== Installation
+
+Just include it in your Gemfile:
+
+  group :test do
+    gem 'minitest-spec-magic'
+  end
+
+== Examples
+
+Here's a real-world example. Looks familiar?
+
+  # Gemfile
+  group :test do
+    gem 'minitest-spec-magic'
+    gem 'minitest-reporters' # Adds colourful output
+    gem 'factory_girl_rails' # Adds factories (fixtures)
+    gem 'shoulda-matchers'   # Adds matchers
+  end
+
+  # test/test_helper.rb
+  require 'minitest/reporters'
+  MiniTest::Unit.runner = MiniTest::SuiteRunner.new
+  MiniTest::Unit.runner.reporters << MiniTest::Reporters::ProgressReporter.new
+
+  class ActiveSupport::TestCase
+    include FactoryGirl::Syntax::Methods
+  end
+
+  # test/unit/article.rb
+  class ArticleTest < ActiveSupport::TestCase
+
+    should belong_to(:author)
+    should have_many(:comments)
+    should validate_presence_of(:title)
+    should ensure_length_of(:title).is_at_most(140)
+
+    # More ...
+
+  end
+
+  # test/functional/articles_controller.rb
+  class ArticleControllerTest < ActionController::TestCase
+
+    describe "routes" do
+      should route(:get, "/articles").to(:action => "index")
+      should route(:post, "/articles").to(:action => "create")
+      should route(:get, "/articles/new").to(:action => "new")
+      should route(:get, "/articles/1").to(:action => "show", :id => "1")
+      should route(:get, "/articles/1/edit").to(:action => "edit", :id => "1")
+      should route(:put, "/articles/1").to(:action => "update", :id => "1")
+      should route(:delete, "/articles/1").to(:action => "destroy", :id => "1")
+    end
+
+    describe "GET index" do
+      before do
+        @article = FactoryGirl.create(:article)
+        get :index
+      end
+
+      should assign_to(:articles).with { [@article] }
+      should respond_with(:success)
+      should render_template(:index)
+      should_not set_the_flash
+    end
+
+    # More ...
+
+  end
+
+== LICENSE
+
+Copyright (c) 2011 Dimitrij Denissenko, et al.
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
