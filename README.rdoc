@@ -18,18 +18,8 @@ Here's a real-world example. Looks familiar?
   # Gemfile
   group :test do
     gem 'minitest-spec-magic'
-    gem 'minitest-reporters' # Adds colourful output
     gem 'factory_girl_rails' # Adds factories (fixtures)
     gem 'shoulda-matchers'   # Adds matchers
-  end
-
-  # test/test_helper.rb
-  require 'minitest/reporters'
-  MiniTest::Unit.runner = MiniTest::SuiteRunner.new
-  MiniTest::Unit.runner.reporters << MiniTest::Reporters::ProgressReporter.new
-
-  class ActiveSupport::TestCase
-    include FactoryGirl::Syntax::Methods
   end
 
   # test/unit/article.rb
