@@ -1,5 +1,5 @@
 require 'minitest/spec'
-require 'test/unit/testcase'
+require 'minitest/spec/magic/testcase'
 
 # Define the main module
 module MiniTest::Spec::Magic

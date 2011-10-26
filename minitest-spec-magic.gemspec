@@ -2,13 +2,13 @@
 
 Gem::Specification.new do |s|
   s.platform = Gem::Platform::RUBY
-  s.required_ruby_version = '>= 1.8.7'
+  s.required_ruby_version = '>= 1.9.2'
   s.required_rubygems_version = ">= 1.6.0"
 
   s.name        = "minitest-spec-magic"
   s.summary     = "Minitest::Spec extensions for Rails and beyond"
   s.description = "Combines Minitest::Spec with shoulda-like goodies"
-  s.version     = "0.1.0"
+  s.version     = "0.2.0"
 
   s.authors     = ["Dimitrij Denissenko", "Ken Collins", "thoughtbot, inc."]
   s.email       = "dimitrij@blacksquaremedia.com"
