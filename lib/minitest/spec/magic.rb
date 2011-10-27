@@ -14,6 +14,11 @@ class Test::Unit::TestCase
   extend  MiniTest::Spec::Magic::Context
   include MiniTest::Spec::Magic::Expectations
   include MiniTest::Spec::Magic::Assertions
+
+  subject do
+    described = self.class.described_type
+    Class === described ? described.new : described
+  end
 end
 
 # Add magic for ActionController::TestCase

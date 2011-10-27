@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.name        = "minitest-spec-magic"
   s.summary     = "Minitest::Spec extensions for Rails and beyond"
   s.description = "Combines Minitest::Spec with shoulda-like goodies"
-  s.version     = "0.2.0"
+  s.version     = "0.2.1"
 
   s.authors     = ["Dimitrij Denissenko", "Ken Collins", "thoughtbot, inc."]
   s.email       = "dimitrij@blacksquaremedia.com"
