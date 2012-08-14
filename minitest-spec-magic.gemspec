@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.files        = Dir['lib/**/*']
 
-  s.add_dependency "minitest", "~> 2.6.0"
+  s.add_dependency "minitest", ">= 2.6.0"
 
   s.add_development_dependency "rake"
   s.add_development_dependency "bundler"
